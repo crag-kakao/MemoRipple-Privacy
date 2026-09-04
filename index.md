@@ -1,0 +1,84 @@
+---
+title: MemoRipple Privacy Policy
+---
+
+# MemoRipple Privacy Policy
+
+発効日: 2026-09-04
+
+このPrivacy Policyは、MemoRipple（Android app）の現在の実装に基づいて、アプリが扱うデータと扱わないデータを説明する。
+
+## MemoRippleが扱うデータ
+
+MemoRippleは、ユーザーが入力したメモ、コメント、日記、未来コメント、ノートとそのエピソード、タグ、メモ／日記へ添付した写真とアプリ設定を通常は端末内に保存する。これらは記録、検索、再生、読み上げ、バックアップなど、ユーザーが選んだ機能のために使われる。読み上げ用のユーザー辞書、定型文、ユーザーが追加したコメントフォントも端末内に保存される。
+
+選択した写真はMemoRippleのprivate storageへoriginal binaryのままcopyする。写真はAndroidのシステム写真選択画面（Photo Picker）経由でユーザーが選んだものだけを受け取り、端末の写真ライブラリ全体へアクセスする権限は要求しない。写真には撮影機器や撮影条件などのembedded metadata（EXIF等）が含まれる可能性がある。MemoRippleは保存した写真を再圧縮したりmetadataを自動削除したりしない。写真binaryはTTS engineへ渡さず、Android Overlayへ表示または送信しない。
+
+MemoRippleは広告SDK、analytics SDK、tracking SDK、crash reporting SDKを組み込んでいない。現在の実装には、MemoRipple自身がユーザーデータを広告目的で販売する機能はない。
+
+## アカウント
+
+MemoRipple独自のアカウントは存在しない。アプリの基本利用（メモ、日記、再生、読み上げ、手動バックアップなど）にGoogleアカウントは不要である。Googleアカウントの認可（OAuth）は、任意のGoogle Driveバックアップ機能を使う場合にだけ必要になる。
+
+## 未来コメント
+
+封印中、受取待ち、初回表示が完了していない未来コメントは、製品ルールに従って本文や表現を画面とAccessibility情報から隠す。これは画面上の非表示であり、暗号学的な暗号化ではない。端末内データやバックアップには、条件を満たす前の本文と表現が含まれる。
+
+## 手動バックアップと復元
+
+ユーザーはAndroidのシステムファイル選択画面を使い、任意の場所へバックアップファイルを作成し、選択したファイルから復元できる。バックアップにはメモ、コメント、日記、未来コメント、ノートとエピソード、添付写真、タグ、整理状態と設定が含まれる。
+
+バックアップファイル自体は暗号化されない。保管場所と共有範囲はユーザーが管理する。復元を確定すると、現在のMemoRippleのデータは選択したバックアップ内容で置き換えられる。復元Previewは件数などの概要だけを示し、封印中または受取待ちの未来コメント本文・表現は表示しない。
+
+## 読める形式での書き出し
+
+ユーザーは自分の記録を、アプリなしで読める一般的な形式へ書き出せる。個別の記録はMarkdown、DOCX、PDFなどへ、全体はMarkdownと元の写真を含むZIPへ、いずれもユーザーの操作で、ユーザーが選んだ保存先へ書き出す。自動書き出しを有効にした場合も、ユーザーが事前に選択して許可したフォルダへ書き出すだけである。書き出しはMemoRippleの運営者やその他のserverへ送信する機能ではなく、書き出したファイルの保管場所と共有範囲はユーザーが管理する。書き出したファイルは暗号化されない。
+
+ZIP書き出しには、JPEG写真から位置情報などのmetadataを取り除くオプションがある。これは書き出したコピーにだけ適用され、アプリ内に保存された元の写真は変更しない。
+
+## Androidシステムバックアップ
+
+MemoRippleはAndroid標準のシステムバックアップとデバイス間転送を無効化しており、アプリのデータはそれらの経路では複製されない。バックアップは、上記のアプリ内手動バックアップと、次のGoogle Driveバックアップという明示された機能だけを使う。
+
+## Google Drive自動バックアップ
+
+Google Driveバックアップは任意で、ユーザーが有効化または実行した場合だけ利用する。バックアップの送信先はユーザー自身のGoogle Driveであり、MemoRippleの運営者が管理するserverは存在しない。添付写真のoriginal binaryとembedded metadataもbackup containerへ含まれる。MemoRippleは`drive.appdata` scopeを要求し、MemoRippleのバックアップをGoogle Driveのアプリ専用領域`appDataFolder`へ作成・更新・読み込みする。通常のGoogle Driveファイル一覧を読み取る権限は要求しない。
+
+認可時にはGoogleまたはAndroidのシステムサービスと情報がやり取りされる。MemoRippleは取得したaccess tokenをアプリの永続データへ保存せず、Google accountのemail addressを独自データベースへ保存しない。Google Drive上のバックアップをアプリ内から削除する機能は現在ない。アプリのアンインストールによってremote backupも自動削除されるとは保証しない。
+
+## 読み上げ
+
+ユーザーが読み上げを開始すると、対象の文章を端末で選択されているAndroid Text-to-Speech engineへ渡す。engineによっては処理にnetworkを利用する場合がある。MemoRippleは選択されたengineのデータ処理やprivacy behaviorを管理または保証しない。MemoRipple自身のserverへ読み上げテキストを送る実装はない。
+
+バックグラウンドでの読み上げ中は、AndroidのForeground Serviceと通知を使用する。通知は再生状態の表示と停止操作のためのもので、これはOverlay再生の通知と同じAndroidの通知の仕組みを使う。
+
+## Androidオーバーレイ
+
+ユーザーが明示的に許可して再生を開始すると、MemoRippleは保存したコメントを他のアプリの上へ表示する。この機能は下層アプリの画面内容を読み取ったり記録したりするためのものではない。MemoRippleはAccessibility Service、Usage Access、Media Projection、Notification Listenerを使用しない。
+
+## 権限とspecial access
+
+現在のAndroid Manifestは次を使用する。
+
+- Internet: Google Driveの認可、backup、restoreの通信
+- 他のアプリの上に表示: Overlay機能を選んだユーザーがシステム設定で明示的に許可
+- Foreground Service: Overlay再生とバックグラウンド読み上げをユーザーに見えるserviceとして実行
+- Notification: Overlayと読み上げのforeground serviceの状態と停止操作を表示
+
+通常のメモ、日記の記録だけにOverlay special accessは必要ない。読み上げengine自身の通信はMemoRippleのGoogle Drive通信とは別である。
+
+## 削除と保持
+
+メモはTrashへ移動し、Trashから復元または完全削除できる。Trashを空にすると対象メモと従属データを完全削除する。日記、未来コメントなどは各画面が提供する削除操作の範囲で端末内から削除できる。アプリをアンインストールした場合のlocal sandbox dataの扱いはAndroid OSが管理する。
+
+手動またはGoogle Driveからの復元はlocal dataのreplacementである。Google Drive上のremote backupはlocal削除やアンインストールと別に扱われ、アプリ内での削除によってDrive上のバックアップが消えるとは限らない。
+
+## Policyの変更
+
+機能、permissions、network service、analytics等が変わる場合は、このPolicyとアプリ内Privacy Overviewを更新する。重要な変更の通知方法は公開形態と変更内容に応じて決定する。
+
+## 連絡先
+
+このPolicyやMemoRippleのデータの扱いについての質問は、次の連絡先へ送ることができる。
+
+- Contact: `cragcoffee96@gmail.com`
